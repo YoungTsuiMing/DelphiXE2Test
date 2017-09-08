@@ -20,6 +20,15 @@ type
     btn9: TButton;
     btn10: TButton;
     btn11: TButton;
+    btn12: TButton;
+    btn13: TButton;
+    btn14: TButton;
+    btn15: TButton;
+    btn16: TButton;
+    btn17: TButton;
+    btn18: TButton;
+    btn19: TButton;
+    btn20: TButton;
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
@@ -31,6 +40,9 @@ type
     procedure btn9Click(Sender: TObject);
     procedure btn10Click(Sender: TObject);
     procedure btn11Click(Sender: TObject);
+    procedure btn12Click(Sender: TObject);
+    procedure btn13Click(Sender: TObject);
+    procedure btn14Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,20 +77,80 @@ begin
   jo := SO(JsonStr);
   jo.SaveTo(path);
   ShowMessage(jo.AsJSon(True, False));
-
   Memo1.Lines.LoadFromFile(path);
 end;
 
 procedure TForm3.btn11Click(Sender: TObject);
 var
   jo: ISuperObject;
-  stm: TStream;
+  stm: TStringStream;
   b: Byte;
 begin
   stm := TStringStream.Create('{"No2":"\u674e\u56db","No1":"\u5f20\u4e09"}');
-  jo := TSuperObject.ParseStream(stm);
+  jo := TSuperObject.ParseStream(stm, True);
   ShowMessage(jo.AsJSon(True, False));
   stm.Free;
+end;
+
+procedure TForm3.btn12Click(Sender: TObject);
+var
+  jo: ISuperObject;
+begin
+  jo := SO(JsonStr);
+  ShowMessage(jo.AsJSon);
+  ShowMessage(jo.AsJSon(True));
+  ShowMessage(jo.AsJSon(True, False));
+  ShowMessage(jo.AsJSon(False, False));
+end;
+
+procedure TForm3.btn13Click(Sender: TObject);
+var
+ jo:ISuperObject;
+begin
+  jo:= SO(Memo1.Text);
+  ShowMessage(jo['name'].AsString);
+  ShowMessage(jo['age'].AsString);
+  ShowMessage(jo['sex'].AsString);
+  ShowMessage(jo['weight'].AsString);
+  ShowMessage(jo['addresses'].AsString);
+  ShowMessage(jo['tel'].AsString);
+  ShowMessage(jo['children'].AsString);
+end;
+
+procedure TForm3.btn14Click(Sender: TObject);
+var
+  jo: ISuperObject;
+  s: string;
+  i: Integer;
+  d: Double;
+  b: Boolean;
+begin
+  jo := SO(Memo1.Text);
+
+  s := jo['name'].AsString;
+  i := jo['age'].AsInteger;
+  b := jo['sex'].AsBoolean;
+  d := jo['weight'].AsDouble;
+
+  ShowMessage(s);
+  ShowMessage(IntToStr(i));
+  ShowMessage(BoolToStr(b, True));
+  ShowMessage(FloatToStr(d));
+
+  s := jo.S['name'];
+  i := jo.I['age'];
+  b := jo.B['sex'];
+  d := jo.D['weight'];
+
+  ShowMessage(s);
+  ShowMessage(IntToStr(i));
+  ShowMessage(BoolToStr(b, True));
+  ShowMessage(FloatToStr(d));
+{
+  jo['name'] 是 jo.O['name'] 的简化形式, 因为它是类的默认数组;
+  jo.N 类似 jo.O, 区别是 jo.N 在参数不妥时可返回空;
+  jo.M 和方法有关, 对象中可嵌入方法.
+}
 end;
 
 procedure TForm3.btn1Click(Sender: TObject);

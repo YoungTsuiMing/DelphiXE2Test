@@ -17,9 +17,28 @@ object Form3: TForm3
     Left = 8
     Top = 8
     Width = 375
-    Height = 309
+    Height = 393
     Lines.Strings = (
-      'Memo1')
+      '{'
+      '  "name": "'#24352#19977'", /* '#27880#37322' */'
+      '  "age": 33,'
+      '  "sex": true,'
+      '  "weight": 123.456,'
+      '  "tel": ["86-1111111", "86-2222222"],'
+      '  "addresses":{"address":"A'#30465'B'#24066'", "pc":"100001"},'
+      '  "children": ['
+      '    {'
+      '      "name": "'#24352#32487'",'
+      '      "age": "22",'
+      '      "sex": true'
+      '    },'
+      '    {'
+      '      "name": "'#24352#25215'",'
+      '      "age": "11",'
+      '      "sex": false'
+      '    }'
+      '  ]'
+      '}')
     ScrollBars = ssBoth
     TabOrder = 0
   end
@@ -130,5 +149,71 @@ object Form3: TForm3
     Caption = 'btn12'
     TabOrder = 12
     OnClick = btn12Click
+  end
+  object btn13: TButton
+    Left = 8
+    Top = 407
+    Width = 75
+    Height = 25
+    Caption = 'btn13'
+    TabOrder = 13
+    OnClick = btn13Click
+  end
+  object btn14: TButton
+    Left = 89
+    Top = 407
+    Width = 75
+    Height = 25
+    Caption = 'btn14'
+    TabOrder = 14
+    OnClick = btn14Click
+  end
+  object btn15: TButton
+    Left = 170
+    Top = 407
+    Width = 75
+    Height = 25
+    Caption = 'btn15'
+    TabOrder = 15
+  end
+  object btn16: TButton
+    Left = 251
+    Top = 407
+    Width = 75
+    Height = 25
+    Caption = 'btn16'
+    TabOrder = 16
+  end
+  object btn17: TButton
+    Left = 8
+    Top = 438
+    Width = 75
+    Height = 25
+    Caption = 'btn17'
+    TabOrder = 17
+  end
+  object btn18: TButton
+    Left = 89
+    Top = 438
+    Width = 75
+    Height = 25
+    Caption = 'btn18'
+    TabOrder = 18
+  end
+  object btn19: TButton
+    Left = 170
+    Top = 438
+    Width = 75
+    Height = 25
+    Caption = 'btn19'
+    TabOrder = 19
+  end
+  object btn20: TButton
+    Left = 251
+    Top = 438
+    Width = 75
+    Height = 25
+    Caption = 'btn20'
+    TabOrder = 20
   end
 end

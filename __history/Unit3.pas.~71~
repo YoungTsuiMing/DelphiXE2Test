@@ -21,6 +21,14 @@ type
     btn10: TButton;
     btn11: TButton;
     btn12: TButton;
+    btn13: TButton;
+    btn14: TButton;
+    btn15: TButton;
+    btn16: TButton;
+    btn17: TButton;
+    btn18: TButton;
+    btn19: TButton;
+    btn20: TButton;
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
@@ -33,6 +41,7 @@ type
     procedure btn10Click(Sender: TObject);
     procedure btn11Click(Sender: TObject);
     procedure btn12Click(Sender: TObject);
+    procedure btn13Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,15 +86,34 @@ var
   b: Byte;
 begin
   stm := TStringStream.Create('{"No2":"\u674e\u56db","No1":"\u5f20\u4e09"}');
-  jo := TSuperObject.ParseStream(stm,True);
+  jo := TSuperObject.ParseStream(stm, True);
   ShowMessage(jo.AsJSon(True, False));
   stm.Free;
 end;
 
 procedure TForm3.btn12Click(Sender: TObject);
 var
-  jo:ISuperObject;
+  jo: ISuperObject;
 begin
+  jo := SO(JsonStr);
+  ShowMessage(jo.AsJSon);
+  ShowMessage(jo.AsJSon(True));
+  ShowMessage(jo.AsJSon(True, False));
+  ShowMessage(jo.AsJSon(False, False));
+end;
+
+procedure TForm3.btn13Click(Sender: TObject);
+var
+ jo:ISuperObject;
+begin
+  jo:= SO(Memo1.Text);
+  ShowMessage(jo['name'].AsString);
+  ShowMessage(jo['age'].AsString);
+  ShowMessage(jo['sex'].AsString);
+  ShowMessage(jo['weight'].AsString);
+  ShowMessage(jo['addresses'].AsString);
+  ShowMessage(jo['tel'].AsString);
+  ShowMessage(jo['children'].AsString);
 
 end;
 

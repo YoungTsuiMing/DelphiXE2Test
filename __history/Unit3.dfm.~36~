@@ -166,7 +166,6 @@ object Form3: TForm3
     Height = 25
     Caption = 'btn14'
     TabOrder = 14
-    OnClick = btn14Click
   end
   object btn15: TButton
     Left = 170
