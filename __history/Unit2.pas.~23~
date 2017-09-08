@@ -1,0 +1,91 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, AdvBadge;
+
+type
+  TShiftState = set of (ssShift, ssAlt, ssCtrl, ssLeft, ssRight, ssMiddle, ssDouble, ssTouch, ssPen);
+
+type
+  TForm2 = class(TForm)
+    btn1: TAdvBadgeButton;
+    btn2: TButton;
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+var
+  P: Pointer;
+
+procedure TForm2.btn1Click(Sender: TObject);
+const
+  P1: PChar = 'codegear';
+  P2: PChar = 'delphi';
+var
+  strarr: array[0..15] of Char;
+begin
+  StrCopy(strarr, p1);
+  StrCat(strarr, ' ');
+  StrCat(strarr, P2);
+
+  ShowMessage(strarr);
+end;
+
+procedure TForm2.btn2Click(Sender: TObject);
+begin
+  if p = nil then
+    RunError(204);
+end;
+
+procedure TForm2.FormCreate(Sender: TObject);
+var
+  Str: string;
+  pStr: PString;
+begin
+  Str := 'Delphi 2007';
+  pStr := @Str;       {用 @ 获取指针}
+  ShowMessage(pStr^); {Delphi 2007}
+
+  Str := 'Delphi 2008';
+  pStr := Addr(Str);  {Addr 和 @ 的作用是一样的, 都是获取指针}
+  ShowMessage(pStr^); {Delphi 2008}
+
+
+  {获取 Form1 的指针}
+  ShowMessage(IntToStr(Integer(@Self)));          {1244648; 这是动态的}
+  ShowMessage(IntToStr(Integer(Addr(Self))));     {1244648}
+
+  {获取 Form1 的 FormCreate 过程的指针}
+  ShowMessage(IntToStr(Integer(@OnCreate)));      {4570956}
+  ShowMessage(IntToStr(Integer(Addr(OnCreate)))); {4570956}
+
+  {
+    如果要获取指针的对象的表达式太复杂, 用 @ 就不好使了;
+    这时只能使用 Addr, 我以前碰到过这种情况, 今天想不起来了...
+  }
+end;
+
+procedure TForm2.FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+begin
+  Self.Caption := '';
+  if (ssCtrl in Shift) and (ssShift in Shift) then
+    Self.Caption := 'Ctrl'; //包含
+end;
+
+end.
+

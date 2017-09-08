@@ -1,0 +1,18 @@
+program test001;
+
+uses
+  Vcl.Forms,
+  Unit13 in 'Unit13.pas' {Form13},
+  superobject in 'superobject.pas',
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Turquoise Gray');
+  Application.CreateForm(TForm13, Form13);
+  Application.Run;
+end.
